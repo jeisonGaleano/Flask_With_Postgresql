@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
+from flask_cors import CORS
 
 from models.entities.Chevrolet import Chevrolet
 from models.entities.Login import Login
 from models.ChevroletModel import ChevroletModel
 
 main = Blueprint('chevrolet_blueprint', __name__)
-
+CORS(main)
 
 @main.route('/')
 def get_chevrolet():
