@@ -12,7 +12,7 @@ class Chevrolet():
         self.modelo = modelo
         self.ano = ano
     
-    def __init__(self, precio=None, color=None, marca=None, modelo=None, ano=None) -> None:
+    def __update__(self, precio=None, color=None, marca=None, modelo=None, ano=None) -> None:
 
         self.precio = precio
         self.color = color
