@@ -101,16 +101,12 @@ def add_user():
 def update_chevrolet(web_scrapet_order):
     try:
         requestData = request.json[0];
-        web_scrapet_start_url = requestData['web_scrapet_start_url']
-        link = requestData['link']
-        link_href = requestData['link_href']
         precio = requestData['precio']
         color = requestData['color']
         marca = requestData['marca']       
         modelo = requestData['modelo']
         ano = requestData['ano']
-        chevrolet = Chevrolet(web_scrapet_order, web_scrapet_start_url, link, link_href
-                                , precio, color, marca, modelo, ano)
+        chevrolet = Chevrolet(precio, color, marca, modelo, ano)
         
         print(chevrolet)
 

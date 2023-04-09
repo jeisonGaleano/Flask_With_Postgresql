@@ -11,6 +11,14 @@ class Chevrolet():
         self.marca = marca
         self.modelo = modelo
         self.ano = ano
+    
+    def __init__(self, precio=None, color=None, marca=None, modelo=None, ano=None) -> None:
+
+        self.precio = precio
+        self.color = color
+        self.marca = marca
+        self.modelo = modelo
+        self.ano = ano
 
     def to_JSON(self):
         return {

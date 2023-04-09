@@ -100,10 +100,9 @@ class ChevroletModel():
             connection = get_connection()
 
             with connection.cursor() as cursor:
-                cursor.execute("""INSERT INTO public.chevrolet
-                                (webscraperorder, webscraperstarturl, link, linkhref, precio, color, marca, modelo, ano)
-                                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)""", (chevrolet.web_scrapet_order, chevrolet.web_scrapet_start_url, chevrolet.link, chevrolet.link_href
-                                                                                , chevrolet.precio, chevrolet.color, chevrolet.marca, chevrolet.modelo, chevrolet.ano))
+                cursor.execute("""UPDATE public.chevrolet
+                                SET  precio=%s, color=%s, marca=%s, modelo=%s, ano=%s
+                                where webscraperorder = %s;""", (chevrolet.precio, chevrolet.color, chevrolet.marca, chevrolet.modelo, chevrolet.ano, webscraperorder))
                 affected_rows = cursor.rowcount
                 connection.commit()
 
