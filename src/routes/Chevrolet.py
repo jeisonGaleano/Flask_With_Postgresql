@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 
 from models.entities.Chevrolet import Chevrolet
+from models.entities.Login import Login
 from models.ChevroletModel import ChevroletModel
 
 main = Blueprint('chevrolet_blueprint', __name__)
@@ -70,4 +71,57 @@ def login_chevrolet(usuario, contrasena):
         else:
             return jsonify({}), 404
     except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
+
+@main.route('/add-user', methods=['POST'])
+def add_user():
+    try:
+        requestData = request.json[0];
+        usuario = requestData['usuario']
+        contrasena = requestData['contrasena']
+        login = Login(usuario, contrasena)
+        
+        print(login)
+
+        affected_rows = ChevroletModel.create_user(login)
+        print(affected_rows)
+
+        if affected_rows == 1:
+            return jsonify(login.usuario)
+        else:
+            return jsonify({'message': "Error on insert"}), 500
+
+    except Exception as ex:
+        print("fff")
+        print(ex)
+        return jsonify({'message': str(ex)}), 500
+    
+@main.route('/update/<web_scrapet_order>', methods=['POST'])
+def update_chevrolet(web_scrapet_order):
+    try:
+        requestData = request.json[0];
+        web_scrapet_start_url = requestData['web_scrapet_start_url']
+        link = requestData['link']
+        link_href = requestData['link_href']
+        precio = requestData['precio']
+        color = requestData['color']
+        marca = requestData['marca']       
+        modelo = requestData['modelo']
+        ano = requestData['ano']
+        chevrolet = Chevrolet(web_scrapet_order, web_scrapet_start_url, link, link_href
+                                , precio, color, marca, modelo, ano)
+        
+        print(chevrolet)
+
+        affected_rows = ChevroletModel.update_data_chevrolet(chevrolet,web_scrapet_order)
+        print(affected_rows)
+
+        if affected_rows == 1:
+            return jsonify(chevrolet.web_scrapet_order)
+        else:
+            return jsonify({'message': "Error on insert"}), 500
+
+    except Exception as ex:
+        print("fff")
+        print(ex)
         return jsonify({'message': str(ex)}), 500

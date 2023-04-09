@@ -75,3 +75,39 @@ class ChevroletModel():
             return movie
         except Exception as ex:
             raise Exception(ex)
+    
+    @classmethod
+    def create_user(self, login):
+        try:
+            connection = get_connection()
+
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                               INSERT INTO public.login
+                                (usuario, contrasena)
+                                VALUES(%s, %s)""", (login.usuario, login.contrasena))
+                affected_rows = cursor.rowcount
+                connection.commit()
+
+            connection.close()
+            return affected_rows
+        except Exception as ex:
+            raise Exception(ex)
+        
+    @classmethod
+    def update_data_chevrolet(self, chevrolet, webscraperorder):
+        try:
+            connection = get_connection()
+
+            with connection.cursor() as cursor:
+                cursor.execute("""INSERT INTO public.chevrolet
+                                (webscraperorder, webscraperstarturl, link, linkhref, precio, color, marca, modelo, ano)
+                                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)""", (chevrolet.web_scrapet_order, chevrolet.web_scrapet_start_url, chevrolet.link, chevrolet.link_href
+                                                                                , chevrolet.precio, chevrolet.color, chevrolet.marca, chevrolet.modelo, chevrolet.ano))
+                affected_rows = cursor.rowcount
+                connection.commit()
+
+            connection.close()
+            return affected_rows
+        except Exception as ex:
+            raise Exception(ex)
