@@ -97,7 +97,7 @@ def add_user():
         print(ex)
         return jsonify({'message': str(ex)}), 500
     
-@main.route('/update/<web_scrapet_order>', methods=['POST'])
+@main.route('/update/<web_scrapet_order>', methods=['PUT'])
 def update_chevrolet(web_scrapet_order):
     try:
         requestData = request.json[0];
@@ -106,15 +106,13 @@ def update_chevrolet(web_scrapet_order):
         marca = requestData['marca']       
         modelo = requestData['modelo']
         ano = requestData['ano']
-        chevrolet = Chevrolet(precio, color, marca, modelo, ano)
         
-        print(chevrolet)
 
-        affected_rows = ChevroletModel.update_data_chevrolet(chevrolet,web_scrapet_order)
+        affected_rows = ChevroletModel.update_data_chevrolet(precio, color, marca, modelo, ano ,web_scrapet_order)
         print(affected_rows)
 
         if affected_rows == 1:
-            return jsonify(chevrolet.web_scrapet_order)
+            return jsonify(web_scrapet_order)
         else:
             return jsonify({'message': "Error on insert"}), 500
 

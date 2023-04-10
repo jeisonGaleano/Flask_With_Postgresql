@@ -95,14 +95,14 @@ class ChevroletModel():
             raise Exception(ex)
         
     @classmethod
-    def update_data_chevrolet(self, chevrolet, webscraperorder):
+    def update_data_chevrolet(self, precio, color, marca, modelo, ano, webscraperorder):
         try:
             connection = get_connection()
 
             with connection.cursor() as cursor:
                 cursor.execute("""UPDATE public.chevrolet
                                 SET  precio=%s, color=%s, marca=%s, modelo=%s, ano=%s
-                                where webscraperorder = %s;""", (chevrolet.precio, chevrolet.color, chevrolet.marca, chevrolet.modelo, chevrolet.ano, webscraperorder))
+                                where webscraperorder = %s;""", (precio, color, marca, modelo, ano, webscraperorder))
                 affected_rows = cursor.rowcount
                 connection.commit()
 
