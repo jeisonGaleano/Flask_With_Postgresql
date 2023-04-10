@@ -21,8 +21,8 @@ def get_chevrolet():
 def add_chevrolet():
     try:
         requestData = request.json[0];
-        web_scrapet_order = requestData['web_scrapet_order']
-        web_scrapet_start_url = requestData['web_scrapet_start_url']
+        web_scraper_order = requestData['web_scraper_order']
+        web_scraper_start_url = requestData['web_scraper_start_url']
         link = requestData['link']
         link_href = requestData['link_href']
         precio = requestData['precio']
@@ -30,7 +30,7 @@ def add_chevrolet():
         marca = requestData['marca']       
         modelo = requestData['modelo']
         ano = requestData['ano']
-        chevrolet = Chevrolet(web_scrapet_order, web_scrapet_start_url, link, link_href
+        chevrolet = Chevrolet(web_scraper_order, web_scraper_start_url, link, link_href
                                 , precio, color, marca, modelo, ano)
         
         print(chevrolet)
@@ -39,7 +39,7 @@ def add_chevrolet():
         print(affected_rows)
 
         if affected_rows == 1:
-            return jsonify(chevrolet.web_scrapet_order)
+            return jsonify(chevrolet.web_scraper_order)
         else:
             return jsonify({'message': "Error on insert"}), 500
 
