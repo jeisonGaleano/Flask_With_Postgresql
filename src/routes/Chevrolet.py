@@ -51,12 +51,11 @@ def add_chevrolet():
 @main.route('/delete/<web_scrapet_order>', methods=['DELETE'])
 def delete_chevrolet(web_scrapet_order):
     try:
-        chevrolet = Chevrolet(web_scrapet_order)
 
-        affected_rows = ChevroletModel.delete_chevrolet(chevrolet)
+        affected_rows = ChevroletModel.delete_chevrolet(web_scrapet_order)
 
         if affected_rows == 1:
-            return jsonify(chevrolet.web_scrapet_order)
+            return jsonify(web_scrapet_order)
         else:
             return jsonify({'message': "No chevrolet deleted"}), 404
 

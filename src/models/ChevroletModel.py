@@ -43,12 +43,13 @@ class ChevroletModel():
             raise Exception(ex)
     
     @classmethod
-    def delete_chevrolet(self, chevrolet):
+    def delete_chevrolet(self, web_scraper_order):
         try:
             connection = get_connection()
 
             with connection.cursor() as cursor:
-                cursor.execute("DELETE FROM chevrolet WHERE webscraperorder = %s", (chevrolet.web_scraper_order,))
+                
+                cursor.execute("DELETE FROM chevrolet WHERE webscraperorder = %s", (web_scraper_order,))
                 affected_rows = cursor.rowcount
                 connection.commit()
 
